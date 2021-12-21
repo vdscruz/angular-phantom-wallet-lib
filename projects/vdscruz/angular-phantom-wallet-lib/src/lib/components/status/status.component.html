@@ -1,0 +1,20 @@
+<div *ngIf="type == 'text'">
+  <div *ngIf="solana == undefined || solana.wallet == wallet_not_found || solana.wallet == wallet_not_phantom">
+    {{error}}
+  </div>
+  <div *ngIf="solana?.wallet == wallet_is_phantom">
+    {{success}} {{solana.connection == connected ? ' and connected': ''}}
+  </div>
+</div>
+
+<div *ngIf="type == 'icon'">
+  <div *ngIf="solana == undefined || solana.wallet == wallet_not_found || solana.wallet == wallet_not_phantom">
+    vermelho
+  </div>
+  <div *ngIf="solana?.wallet == wallet_is_phantom && solana.connection == disconnected">
+    amarelo
+  </div>
+  <div *ngIf="solana?.wallet == wallet_is_phantom && solana.connection == connected">
+    verde
+  </div>
+</div>

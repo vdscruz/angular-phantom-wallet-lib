@@ -1,0 +1,6 @@
+<a *ngIf="solana?.connection == disconnected" [ngClass]="class" (click)="connect()">
+  Connect Wallet
+</a>
+<a *ngIf="solana?.connection == connected" [ngClass]="class" (click)="disconnect()">
+  Disconnect
+</a>
