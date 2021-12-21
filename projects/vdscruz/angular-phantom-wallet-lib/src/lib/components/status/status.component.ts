@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PhantomWalletService } from '../../phantom-wallet.service';
 import { ConnectionStatus, WalletStatus } from '../../types/status.type';
 import { Solana } from './../../types/solana.type';
+import { Subscription } from 'rxjs';
 
 
 
@@ -18,6 +19,7 @@ export class StatusComponent implements OnInit {
   @Input() success?: string = 'Phantom is here';
   @Input() error?: string = 'Phantom not installed install now';
 
+  private sub: Subscription;
   solana: Solana;
 
   wallet_not_found: WalletStatus = WalletStatus.walletNotFound;
@@ -28,13 +30,17 @@ export class StatusComponent implements OnInit {
   disconnected: ConnectionStatus = ConnectionStatus.disconnected;
 
   constructor(private pwService: PhantomWalletService) {
-    pwService.Solana.subscribe(value => {
+    this.sub = this.pwService.Solana.subscribe(value => {
       this.solana = value;
     });
   }
 
   ngOnInit(): void {
 
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

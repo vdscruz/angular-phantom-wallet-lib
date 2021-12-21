@@ -6,12 +6,12 @@ import { PhantomWalletService } from 'projects/vdscruz/angular-phantom-wallet-li
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     AngularPhantomWalletLibModule.forRoot()
+  ],
+  declarations: [
+    AppComponent
   ],
   bootstrap: [AppComponent]
 })
