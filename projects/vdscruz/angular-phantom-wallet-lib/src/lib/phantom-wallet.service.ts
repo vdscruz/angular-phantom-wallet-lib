@@ -1,7 +1,8 @@
-import { EventEmitter, Inject, Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { interval, Observable, Subject, Subscription, BehaviorSubject } from 'rxjs';
+import { interval, Observable, Subject, Subscription } from 'rxjs';
 import { Solana } from './types/solana.type';
+import { Connection, Transaction } from '@solana/web3.js';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,11 @@ import { Solana } from './types/solana.type';
 export class PhantomWalletService {
 
   private readonly SOLANA_OBJECT = 'solana';
+  private readonly NETWORK = 'devnet';
   private readonly document;
   private readonly subscription: Subscription;
   private solana: any;
-  private bs: BehaviorSubject<Solana> = new BehaviorSubject(null);
+  private sub: Subject<Solana> = new Subject();
 
   constructor(@Inject(DOCUMENT) private doc: Document) {
     this.document = doc;
@@ -21,7 +23,7 @@ export class PhantomWalletService {
     this.subscription = source.subscribe(val => {
       if (this.solana == undefined) {
         this.solana = this.document.defaultView[this.SOLANA_OBJECT]
-        this.bs.next(new Solana(this.solana));
+        this.sub.next(new Solana(this.solana));
       }
 
       if (this.solana != undefined) {
@@ -31,20 +33,42 @@ export class PhantomWalletService {
   }
 
   get Solana() {
-    return this.bs.asObservable();
+    return this.sub.asObservable();
+  }
+
+  get Network() {
+    return this.NETWORK;
   }
 
   async connect() {
     if (this.solana && this.solana.isPhantom) {
       var resp = await this.solana.connect();
-      this.bs.next(new Solana(this.solana));
+      this.sub.next(new Solana(this.solana));
     }
   }
 
   async disconnect() {
     if (this.solana && this.solana.isPhantom) {
       var resp = await this.solana.disconnect();
-      this.bs.next(new Solana(this.solana));
+      this.sub.next(new Solana(this.solana));
     }
+  }
+
+  async sendTransaction() {
+    return new Observable(subs => {
+      const connection = new Connection(this.Network);
+      const transaction = new Transaction();
+      //const { signature } = await this.solana.signAndSendTransaction(transaction);
+      //await connection.confirmTransaction(signature);
+      this.solana.signAndSendTransaction(transaction)
+        .then((signature: any) => {
+          connection.confirmTransaction(signature)
+            .then(value => {
+              subs.next(value);
+              subs.complete()
+            })
+        })
+    });
+
   }
 }

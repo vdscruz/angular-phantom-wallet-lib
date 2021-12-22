@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { PhantomWalletService } from 'projects/vdscruz/angular-phantom-wallet-lib/src/lib/phantom-wallet.service';
-import { Solana } from 'projects/vdscruz/angular-phantom-wallet-lib/src/lib/types/solana.type'
+import { ConnectionStatus, PhantomWalletService, Solana } from '@vdscruz/angular-phantom-wallet-lib';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,7 +10,8 @@ import { Subscription } from 'rxjs';
 export class AppComponent {
 
   sub: Subscription;
-  solana: Solana;
+  solana: Solana = undefined;
+  connected: ConnectionStatus = ConnectionStatus.connected;
   constructor(private pwService: PhantomWalletService) {
     this.sub = this.pwService.Solana.subscribe((solana) => {
       this.solana = solana;
