@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PhantomWalletService } from '../../phantom-wallet.service';
+import { PhantomWalletService } from '../../services/phantom-wallet.service';
 import { Solana } from '../../types/solana.type';
 import { ConnectionStatus } from '../../types/status.type';
 import { Subscription } from 'rxjs';
@@ -32,12 +32,12 @@ export class ConnectWalletComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  connect() {
-    this.pwService.connect();
+  async connect() {
+    await this.pwService.connect();
   }
 
-  disconnect() {
-    this.pwService.disconnect();
+  async disconnect() {
+    await this.pwService.disconnect();
   }
 
 }

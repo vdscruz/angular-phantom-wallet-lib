@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { PhantomWalletService } from '../../phantom-wallet.service';
+import { PhantomWalletService } from '../../services/phantom-wallet.service';
 import { ConnectionStatus, WalletStatus } from '../../types/status.type';
 import { Solana } from './../../types/solana.type';
 import { Subscription } from 'rxjs';

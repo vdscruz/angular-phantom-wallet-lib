@@ -9,6 +9,10 @@ enum ConnectionStatus {
   disconnected = 'carteira-desconectada',
 }
 
+enum errStatus {
+  _4001 = '[4001] User rejected the request'
+}
+
 export {
   WalletStatus, ConnectionStatus
 }
