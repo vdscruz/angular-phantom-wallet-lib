@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { interval, Observable, Subject, Subscription } from 'rxjs';
+import { interval, Subject, Subscription } from 'rxjs';
 import { Solana } from '../types/solana.type';
 import {
   Connection, clusterApiUrl, PublicKey,

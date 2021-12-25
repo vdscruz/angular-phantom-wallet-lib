@@ -19,7 +19,7 @@ export class Solana {
   private setWalletStatus(solana: any) {
     if (solana == undefined) {
       this.wallet = WalletStatus.walletNotFound;
-    } else if (solana.isPhantom) {
+    } else if (solana?.isPhantom) {
       this.wallet = WalletStatus.walletIsPhantom;
     } else {
       this.wallet = WalletStatus.walletNotPhantom;
