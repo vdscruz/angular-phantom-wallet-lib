@@ -27,7 +27,7 @@ export class Solana {
   }
 
   private setConnectionStatus(solana: any) {
-    if (solana.isConnected) {
+    if (solana?.isConnected) {
       this.connection = ConnectionStatus.connected;
       this.publicKey = solana.publicKey.toString();
     } else {
