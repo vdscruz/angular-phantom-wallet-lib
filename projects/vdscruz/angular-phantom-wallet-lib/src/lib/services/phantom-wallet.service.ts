@@ -96,7 +96,6 @@ export class PhantomWalletService {
     transaction.add(instruction);
     transaction.feePayer = this.provider!.publicKey!;
     let hash = await this.connection.getRecentBlockhash();
-    console.log("blockhash", hash);
     transaction.recentBlockhash = hash.blockhash;
     return transaction;
   }
