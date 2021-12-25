@@ -1,24 +1,41 @@
 # AngularPhantomWalletLib
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.2.
 
-## Code scaffolding
+## Getting started
 
-Run `ng generate component component-name --project angular-phantom-wallet-lib` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-phantom-wallet-lib`.
-> Note: Don't forget to add `--project angular-phantom-wallet-lib` or else it will be added to the default project in your `angular.json` file. 
+Install the library using npm.
 
-## Build
+Angular version: 12
 
-Run `ng build angular-phantom-wallet-lib` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+npm i @vdscruz/angular-phantom-wallet-lib
+```
 
-## Publishing
+## Example use
 
-After building your library with `ng build angular-phantom-wallet-lib`, go to the dist folder `cd dist/angular-phantom-wallet-lib` and run `npm publish`.
+AppModule.ts
 
-## Running unit tests
+```ts
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AngularPhantomWalletLibModule } from "@vdscruz/angular-phantom-wallet-lib";
 
-Run `ng test angular-phantom-wallet-lib` to execute the unit tests via [Karma](https://karma-runner.github.io).
+import { AppComponent } from "./app.component";
 
-## Further help
+@NgModule({
+  imports: [BrowserModule, AngularPhantomWalletLibModule.forRoot()],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+polyfills.ts
+
+```ts
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */
+(window as any)["global"] = window;
+```

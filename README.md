@@ -2,26 +2,40 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.2.
 
-## Development server
+## Getting started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Install the library using npm.
 
-## Code scaffolding
+Angular version: 12
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+npm i @vdscruz/angular-phantom-wallet-lib
+```
 
-## Build
+## Example use
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+AppModule.ts
 
-## Running unit tests
+```ts
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AngularPhantomWalletLibModule } from "@vdscruz/angular-phantom-wallet-lib";
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+import { AppComponent } from "./app.component";
 
-## Running end-to-end tests
+@NgModule({
+  imports: [BrowserModule, AngularPhantomWalletLibModule.forRoot()],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+polyfills.ts
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```ts
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */
+(window as any)["global"] = window;
+```
